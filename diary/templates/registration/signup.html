@@ -1,0 +1,22 @@
+{% extends "diary/base.html" %}
+
+{% block title %}新規登録{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 class="page-title">新規登録</h2>
+
+    {% if form.errors %}
+        <p class="message error">入力内容を確認してください。</p>
+    {% endif %}
+
+    <form method="post" class="form-card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button type="submit" class="button">登録する</button>
+            <a class="button secondary-button" href="{% url 'login' %}">ログインへ</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

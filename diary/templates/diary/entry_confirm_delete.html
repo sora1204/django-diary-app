@@ -1,0 +1,21 @@
+{% extends "diary/base.html" %}
+
+{% block title %}日記を削除{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 class="page-title">この日記を削除しますか？</h2>
+    <p><strong>タイトル:</strong> {{ entry.title }}</p>
+    <p class="meta">作成日時: {{ entry.created_at|date:"Y年n月j日 H:i" }}</p>
+    <p class="meta">更新日時: {{ entry.updated_at|date:"Y年n月j日 H:i" }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button class="button danger-button" type="submit">削除する</button>
+    </form>
+
+    <div class="actions">
+        <a class="button secondary-button" href="{% url 'diary:entry_detail' entry.pk %}">戻る</a>
+    </div>
+</div>
+{% endblock %}

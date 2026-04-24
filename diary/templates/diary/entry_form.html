@@ -1,0 +1,30 @@
+{% extends "diary/base.html" %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        日記を編集
+    {% else %}
+        日記を作成
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 class="page-title">
+        {% if form.instance.pk %}
+            日記を編集
+        {% else %}
+            日記を作成
+        {% endif %}
+    </h2>
+
+    <form method="post" class="form-card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button type="submit" class="button">保存する</button>
+            <a class="button secondary-button" href="{% url 'diary:entry_list' %}">キャンセル</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

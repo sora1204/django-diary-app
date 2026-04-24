@@ -1,0 +1,20 @@
+{% extends "diary/base.html" %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block content %}
+<article class="card">
+    <h2 class="page-title">{{ entry.title }}</h2>
+    <p class="meta">作成日時: {{ entry.created_at|date:"Y年n月j日 H:i" }}</p>
+    <p class="meta">更新日時: {{ entry.updated_at|date:"Y年n月j日 H:i" }}</p>
+    <div class="entry-content">{{ entry.content|linebreaks }}</div>
+
+    <div class="actions">
+        {% if user.is_authenticated and user == entry.user %}
+            <a class="button" href="{% url 'diary:entry_update' entry.pk %}">編集する</a>
+            <a class="button danger-button" href="{% url 'diary:entry_delete' entry.pk %}">削除する</a>
+        {% endif %}
+        <a class="button secondary-button" href="{% url 'diary:entry_list' %}">一覧に戻る</a>
+    </div>
+</article>
+{% endblock %}

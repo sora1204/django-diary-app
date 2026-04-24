@@ -1,0 +1,8 @@
+.venv/
+.env
+__pycache__/
+*.py[cod]
+db.sqlite3
+.DS_Store
+Thumbs.db
+基本的な流れ.txt

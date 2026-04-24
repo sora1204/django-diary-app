@@ -1,0 +1,31 @@
+{% extends "diary/base.html" %}
+
+{% block title %}日記一覧{% endblock %}
+
+{% block content %}
+<section>
+    <h2 class="page-title">日記一覧</h2>
+
+    {% if entries %}
+        <ul class="entry-list">
+            {% for entry in entries %}
+                <li class="card">
+                    <h3 class="entry-title">
+                        <a href="{% url 'diary:entry_detail' entry.pk %}">{{ entry.title }}</a>
+                    </h3>
+                    <p class="meta">作成日時: {{ entry.created_at|date:"Y年n月j日 H:i" }}</p>
+                    <p class="meta">更新日時: {{ entry.updated_at|date:"Y年n月j日 H:i" }}</p>
+                    <p class="entry-preview">{{ entry.content|truncatechars:60 }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="card">
+            <p>まだ日記がありません。</p>
+            {% if user.is_authenticated %}
+                <a class="button" href="{% url 'diary:entry_create' %}">最初の日記を書く</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
